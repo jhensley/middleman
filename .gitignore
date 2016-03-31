@@ -26,7 +26,7 @@ node_modules
 
 # Ignore .env configuration files
 .env
-config/cert
+config/cert/*
 
 # Ignore .DS_Store files on OS X
 .DS_Store
