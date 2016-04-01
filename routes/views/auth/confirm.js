@@ -19,7 +19,7 @@ exports = module.exports = function(req, res) {
 
     // Reject request if no auth data is stored in session
     if (!locals.authUser) {
-        return res.redirect('/signin');
+        return res.redirect('/');
     }
 
     // Set existing user if already logged in
@@ -45,7 +45,7 @@ exports = module.exports = function(req, res) {
         if (locals.existingUser) return checkAuth();
 
         var query = User.model.findOne();
-        query.where('services.' + locals.authUser.type + '.profileId', locals.authUser.profileId);
+        query.where('email', locals.authUser.email);
         query.exec(function(err, user) {
             if (err) {
                 return next({
@@ -158,7 +158,7 @@ exports = module.exports = function(req, res) {
             }
         ], function(err) {
             req.flash('error', err.message);
-            return res.redirect('/signin');
+            return res.redirect('/');
         });
     };
     view.on('init', function(next) {

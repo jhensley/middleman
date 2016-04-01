@@ -19,9 +19,10 @@ keystone.init({
 	'favicon': 'public/favicon.ico',
 	'views': 'templates/views',
 	'view engine': 'jade',
-	
+
 	'auto update': true,
 	'session': true,
+	'session store': 'mongo',
 	'auth': true,
 	'user model': 'User',
 	'cookie secret': '*zC*Hx>]R)ksuQ$:W{`t;-7mmMlOlhVHcO1]Kgn86oWc3/)4."I7Tp$RUu;w+@T;'

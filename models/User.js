@@ -24,31 +24,6 @@ User.add({
             isConfigured: {
                 type: Boolean,
                 label: 'SAML has been authenticated'
-            },
-            profileId: {
-                type: String,
-                label: 'Profile ID',
-                dependsOn: deps.saml
-            },
-            username: {
-                type: String,
-                label: 'SAML Username',
-                dependsOn: deps.saml
-            },
-            avatar: {
-                type: String,
-                label: 'Image',
-                dependsOn: deps.saml
-            },
-            accessToken: {
-                type: String,
-                label: 'Access Token',
-                dependsOn: deps.saml
-            },
-            refreshToken: {
-                type: String,
-                label: 'Refresh Token',
-                dependsOn: deps.saml
             }
         }
     }

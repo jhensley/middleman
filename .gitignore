@@ -26,8 +26,13 @@ node_modules
 
 # Ignore .env configuration files
 .env
+
+# Ingore private keys
 *.pem
 *.key
 
 # Ignore .DS_Store files on OS X
 .DS_Store
+
+# Editor configuration
+.vscode
