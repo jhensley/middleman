@@ -2,8 +2,11 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
 var deps = {
-    facebook: {
+    saml: {
         'services.saml.isConfigured': true
+    },
+    github: {
+        'services.github.isConfigured': true
     }
 }
 
@@ -25,7 +28,33 @@ User.add({
                 type: Boolean,
                 label: 'SAML has been authenticated'
             }
-        }
+        },
+        github: {
+            isConfigured: {
+                type: Boolean,
+                label: 'GitHub has been authenticated'
+            },
+            profileId: {
+                type: String,
+                label: 'Profile ID',
+                dependsOn: deps.github  
+            },
+            accessToken: {
+                type: String,
+                label: 'Access Token',
+                dependsOn: deps.github
+            },
+            refreshToken: {
+                type: String,
+                label: 'Refresh Token',
+                dependsOn: deps.github
+            },
+            username: {
+                type: String,
+                label: 'GitHub username',
+                dependsOn: deps.github
+            }
+        },
     }
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }

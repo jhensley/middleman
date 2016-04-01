@@ -40,9 +40,6 @@ exports = module.exports = function(app) {
     app.all('/auth/:service/:cb', routes.views.auth.service);
     
 	// Views
-	app.get('/', routes.views.index);
-    
-    // Force login
-    // app.all('/app/*', middleware.requireUser);
+	app.get('/', middleware.requireUser, routes.views.index);
 	
 };

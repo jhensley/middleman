@@ -10,6 +10,7 @@
     "lodash": "^4.7.0",
     "node-config": "0.0.2",
     "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
     "passport-saml": "^0.15.0"
   },
   "devDependencies": {

@@ -45,7 +45,11 @@ exports = module.exports = function(req, res) {
         if (locals.existingUser) return checkAuth();
 
         var query = User.model.findOne();
-        query.where('email', locals.authUser.email);
+        if (locals.authUser.type === 'saml') {
+            query.where('email', locals.authUser.email);    
+        } else {
+            query.where('services.' + locals.authUser.type + '.profileId', locals.authUser.profileId);
+        }
         query.exec(function(err, user) {
             if (err) {
                 return next({

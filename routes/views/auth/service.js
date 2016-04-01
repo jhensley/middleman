@@ -1,6 +1,7 @@
 var _ = require('lodash'),
     services = {
-        saml: require('../../../lib/auth/saml')
+        saml: require('../../../lib/auth/saml'),
+        github: require('../../../lib/auth/github')
     };
 
 exports = module.exports = function(req, res, next) {
