@@ -67,3 +67,17 @@ exports.requireUser = function(req, res, next) {
 	}
 	
 };
+
+/**
+	Prevents people from accessing protected pages when they're not signed in with github
+ */
+
+exports.requireGithubAuthentication = function(req, res, next) {
+
+	if (!req.user.services.github.isConfigured) {
+		res.redirect('/');
+	} else {
+		next();
+	}
+	
+};

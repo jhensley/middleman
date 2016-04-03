@@ -1,7 +1,8 @@
 extends ../../layouts/default
 
 block content
-    .container: .jumbotron
+    .container
+        h1 Confirm your account details
         form(method='post', autocomplete='off', novalidate).profile-form
             input(type='hidden', name='action', value='confirm.details')
             p.lead.mb-2 Thanks for signing in, please confirm your account:

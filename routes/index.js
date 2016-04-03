@@ -41,5 +41,6 @@ exports = module.exports = function(app) {
     
 	// Views
 	app.get('/', middleware.requireUser, routes.views.index);
+    app.get('/manage/:username', middleware.requireUser, middleware.requireGithubAuthentication, routes.views.manage);
 	
 };

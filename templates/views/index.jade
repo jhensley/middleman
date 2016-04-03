@@ -1,15 +1,13 @@
 extends ../layouts/default
 
 block content
-	.container: .jumbotron
-		h1 Welcome
-		p This is your new Middleman portal.
-		hr
-		if user && user.services.github.isConfigured
-			p
-				a(href='http://github.com/#{user.services.github.username}').btn.btn-lg.btn-primary Open your github profile
-		else
-			p You need to authenticate with github to gain access to our Organization
-			p
-				a(href='/auth/github', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
-				|  to Github.
+    .container
+        h1 Github Organization Manager
+        p This is your new Middleman portal.
+        hr
+        if user && user.services.github.isConfigured
+            p You have authenticated to Github using #{user.services.github.username}, 
+                a(href='/manage/#{user.services.github.username}') manage your memberships
+        else
+            p You need to authenticate with github to gain access to our Organizations, 
+                a(href='/auth/github', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
