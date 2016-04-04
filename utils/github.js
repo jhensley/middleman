@@ -6,7 +6,7 @@ var github = new GitHubApi({
     // required
     version: "3.0.0",
     // optional
-    debug: true,
+    debug: false,
     protocol: "https",
     host: "api.github.com", // should be api.github.com for GitHub
     pathPrefix: "", // for some GHEs; none for GitHub
@@ -68,14 +68,32 @@ exports.addUserToOrganization = function(user, org, cb) {
     })
 }
 
+function _recursePagination(client, data, members, cb) {
+    if (client.hasNextPage(data.meta.link)) {
+        client.getNextPage(data.meta.link, function(err, page) {
+            var both = members.concat(page);
+            return _recursePagination(client, page, both, cb);   
+        });   
+    } else {
+        cb(null, members);
+    };
+}
+
 exports.getOrganizationMembers = function(org, cb) {
     github.authenticate({
         type: 'oauth',
         token: process.env.GITHUB_ADMIN_TOKEN
     });
-    ithub.orgs.getMembers({
-        org: org
+    github.orgs.getMembers({
+        org: org,
+        per_page: 100
     }, function(err, data) {
-        cb(err, data);
+        _recursePagination(github, data, data, function(err, members) {
+            var reduced = _.reduce(members, function(memo, iter) {
+                memo.push(iter.login);
+                return memo;
+            }, []);
+            cb(err, reduced); 
+        });
     })
-}
+};
