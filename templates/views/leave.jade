@@ -1,0 +1,10 @@
+extends ../layouts/default
+
+block content
+    .container
+        h1 Leave Organization
+        if error 
+            p Oops, looks like there was an error leaving #{org}
+            pre= error
+        else
+            p Sorry to see you go, however you have successfully left #{org}

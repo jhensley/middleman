@@ -1,0 +1,10 @@
+extends ../layouts/default
+
+block content
+    .container
+        h1 Join Organization
+        if error 
+            p Oops, looks like there was an error joining #{org}
+            pre= error
+        else
+            p Congratulations, you have successfully joined #{org}

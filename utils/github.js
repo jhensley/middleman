@@ -27,13 +27,14 @@ exports.getCommonOrganizationMembershipByUsername = function(user, cb) {
     })
 }
 
-exports.removeUserFromOrganization = function(user, cb) {
+exports.removeUserFromOrganization = function(user, org, cb) {
     github.authenticate({
         type: 'oauth',
         token: process.env.GITHUB_ADMIN_TOKEN
     });
     github.orgs.removeMember({
-        user: User.services.github.username
+        user: User.services.github.username,
+        org: org
     }, function(err, data) {
         cb(err, data);
     })
