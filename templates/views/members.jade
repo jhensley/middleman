@@ -1,0 +1,21 @@
+extends ../layouts/default
+
+block content
+    .container
+        h1 Manage Organization Members
+        h3 for #{org}
+        table.table.table-striped
+            thead
+                tr
+                    td Name
+                    td Email
+                    td Github Username
+                    td Actions
+            tbody
+                for member in members
+                    tr
+                        td #{member.name.first} #{member.name.last}
+                        td= member.email
+                        td= member.services.github.username
+                        td
+                            a(href='/leave/#{member.services.github.username}') Remove

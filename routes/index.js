@@ -44,5 +44,6 @@ exports = module.exports = function(app) {
     app.get('/manage/:username', middleware.requireUser, middleware.requireGithubAuthentication, routes.views.manage);
     app.get('/join/:org', middleware.requireUser, middleware.requireGithubAuthentication, routes.views.org.join);
     app.get('/leave/:org', middleware.requireUser, middleware.requireGithubAuthentication, routes.views.org.leave);
+    app.get('/members/:org', middleware.requireAdminUser, routes.views.admin.members);
 	
 };

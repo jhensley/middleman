@@ -64,7 +64,18 @@ exports.addUserToOrganization = function(user, org, cb) {
         user: user.services.github.username,
         org: org
     }, function(err, data) {
-        console.log(err, data);
+        cb(err, data);
+    })
+}
+
+exports.getOrganizationMembers = function(org, cb) {
+    github.authenticate({
+        type: 'oauth',
+        token: process.env.GITHUB_ADMIN_TOKEN
+    });
+    ithub.orgs.getMembers({
+        org: org
+    }, function(err, data) {
         cb(err, data);
     })
 }

@@ -8,7 +8,8 @@
  * modules in your project's /lib directory.
  */
 
-var _ = require('lodash');
+var _ = require('lodash'),
+    config = require('config');
 
 
 /**
@@ -35,10 +36,21 @@ exports.initLocals = function(req, res, next) {
     
     if (req.user.services.github.isConfigured) {
         locals.navLinks.push({
-            label: 'Manage',
+            label: 'My Organizations',
             key: 'manage',
             href: '/manage/' + req.user.services.github.username
         })
+    }
+    
+    
+    if (req.user.isAdmin) {
+        _.forEach(config.get('github.organizations'), function(org) {
+            locals.navLinks.push({
+                label: org.name,
+                key: 'members/' + org.name,
+                href: '/members/' + org.name 
+            }); 
+        });
     }
 	
 	next();
@@ -87,6 +99,20 @@ exports.requireUser = function(req, res, next) {
 exports.requireGithubAuthentication = function(req, res, next) {
 
 	if (!req.user.services.github.isConfigured) {
+		res.redirect('/');
+	} else {
+		next();
+	}
+	
+};
+
+/**
+	Prevents people from accessing protected pages when they're not signed in with an admin account
+ */
+
+exports.requireAdminUser = function(req, res, next) {
+
+	if (!req.user.isAdmin) {
 		res.redirect('/');
 	} else {
 		next();
