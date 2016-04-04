@@ -4,9 +4,10 @@
   "private": true,
   "dependencies": {
     "async": "^0.9.2",
+    "config": "^1.19.0",
     "connect-mongo": "^1.1.0",
     "dotenv": "^1.1.0",
-    "github4": "^0.5.4",
+    "github": "git+https://github.com/dlozlla/node-github.git",
     "keystone": "^0.3.11",
     "lodash": "^4.7.0",
     "node-config": "0.0.2",

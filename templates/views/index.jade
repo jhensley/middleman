@@ -2,12 +2,12 @@ extends ../layouts/default
 
 block content
     .container
-        h1 Github Organization Manager
+        h1 External Account Manager
         p This is your new Middleman portal.
         hr
         if user && user.services.github.isConfigured
             p You have authenticated to Github using #{user.services.github.username}, 
                 a(href='/manage/#{user.services.github.username}') manage your memberships
         else
-            p You need to authenticate with github to gain access to our Organizations, 
-                a(href='/auth/github', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
+            p You need to authenticate with Github to gain access to our Organizations, 
+                a(href='/auth/github', style='margin-right: 10px') sign in

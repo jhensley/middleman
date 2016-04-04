@@ -20,6 +20,6 @@ exports = module.exports = function(req, res) {
     });
 	
 	// Render the view
-	view.render('join');
+	view.render('leave');
 	
 };

@@ -1,5 +1,10 @@
 {
     "github": {
-        "organizations": ["GannettDigital"]
+        "organizations": [
+            {
+                "name": "GannettDigital",
+                "defaultRoles": []
+            }
+        ]
     }
 }

@@ -1,4 +1,6 @@
-var GitHubApi = require('github4')
+var GitHubApi = require('github'),
+    config = require('config'),
+    _ = require('lodash');
 
 var github = new GitHubApi({
     // required
@@ -18,12 +20,25 @@ exports.getCommonOrganizationMembershipByUsername = function(user, cb) {
     github.authenticate({
         type: 'oauth',
         token: user.services.github.accessToken
-    })
+    });
     github.user.getOrgs({
         user: user.services.github.username
     }, function(err, data) {
         // TODO: Map Config Orgs to user orgs - return object w/ boolean flags
-        cb(err, data);
+        var flatUserOrgs = _.reduce(data, function(memo, iter) {
+            memo.push(iter.login);
+            return memo;
+        }, []);
+        var mappedOrgs = _.map(config.get('github.organizations'), function(org) {
+            var out = {};
+            if (flatUserOrgs.indexOf(org.name) >= 0) {
+                out.active = true;
+            }
+            out.name = org.name;
+            out.url = org.url;
+            return out;
+        });
+        cb(err, mappedOrgs);
     })
 }
 
@@ -33,7 +48,7 @@ exports.removeUserFromOrganization = function(user, org, cb) {
         token: process.env.GITHUB_ADMIN_TOKEN
     });
     github.orgs.removeMember({
-        user: User.services.github.username,
+        user: user.services.github.username,
         org: org
     }, function(err, data) {
         cb(err, data);
@@ -46,9 +61,10 @@ exports.addUserToOrganization = function(user, org, cb) {
         token: process.env.GITHUB_ADMIN_TOKEN
     });
     github.orgs.addOrganizationMembership({
-        user: User.services.github.username,
+        user: user.services.github.username,
         org: org
     }, function(err, data) {
+        console.log(err, data);
         cb(err, data);
     })
 }
