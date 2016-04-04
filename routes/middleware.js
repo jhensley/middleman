@@ -34,7 +34,7 @@ exports.initLocals = function(req, res, next) {
 	
 	locals.user = req.user;
     
-    if (req.user.services.github.isConfigured) {
+    if (req.user && req.user.services.github.isConfigured) {
         locals.navLinks.push({
             label: 'My Organizations',
             key: 'manage',
@@ -43,7 +43,7 @@ exports.initLocals = function(req, res, next) {
     }
     
     
-    if (req.user.isAdmin) {
+    if (req.user && req.user.isAdmin) {
         _.forEach(config.get('github.organizations'), function(org) {
             locals.navLinks.push({
                 label: org.name,

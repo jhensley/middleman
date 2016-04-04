@@ -88,21 +88,25 @@ exports = module.exports = function(req, res) {
             },
             // Check for existing github user
             function(next) {
-                var query = User.model.findOne();
-                query.where('services.' + locals.authUser.type + '.profileId', locals.authUser.profileId);
-                query.exec(function(err, user) {
-                    if (err) {
-                        return next({
-                            message: 'Our apologies, there was a problem on our side with processing your information. Please try again.'
-                        });
-                    };
-                    if (user) {
-                        return next({
-                            message: 'Oops, looks like someone has already authenticated with that Github account'
-                        });
-                    }
-                    return next();
-                });
+                if (locals.authUser.type === 'github') {
+                    var query = User.model.findOne();
+                    query.where('services.' + locals.authUser.type + '.profileId', locals.authUser.profileId);
+                    query.exec(function(err, user) {
+                        if (err) {
+                            return next({
+                                message: 'Our apologies, there was a problem on our side with processing your information. Please try again.'
+                            });
+                        };
+                        if (user) {
+                            return next({
+                                message: 'Oops, looks like someone has already authenticated with that Github account'
+                            });
+                        }
+                        return next();
+                    });   
+                } else {
+                    next();
+                }
             },
             // Create or update user
             function(next) {
