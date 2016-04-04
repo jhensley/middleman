@@ -14,7 +14,6 @@ exports = module.exports = function(req, res) {
         github.getCommonOrganizationMembershipByUsername(req.user, function(err, data) {
             if (!err) {
                 locals.orgs = data;
-                console.log(data);
             }
             next();
         });
