@@ -1,4 +1,4 @@
-extends ../layouts/default
+extends ../../layouts/default
 
 block content
     .container
@@ -18,4 +18,4 @@ block content
                         td= member.email
                         td= member.services.github.username
                         td
-                            a(href='/leave/#{member.services.github.username}') Remove
+                            a(href='/remove/#{org}/#{member.services.github.username}') Remove

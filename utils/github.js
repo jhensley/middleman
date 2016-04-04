@@ -35,7 +35,6 @@ exports.getCommonOrganizationMembershipByUsername = function(user, cb) {
                 out.active = true;
             }
             out.name = org.name;
-            out.url = org.url;
             return out;
         });
         cb(err, mappedOrgs);
@@ -49,6 +48,19 @@ exports.removeUserFromOrganization = function(user, org, cb) {
     });
     github.orgs.removeMember({
         user: user.services.github.username,
+        org: org
+    }, function(err, data) {
+        cb(err, data);
+    })
+}
+
+exports.removeUserFromOrganizationViaAdmin = function(user, org, cb) {
+    github.authenticate({
+        type: 'oauth',
+        token: process.env.GITHUB_ADMIN_TOKEN
+    });
+    github.orgs.removeMember({
+        user: user,
         org: org
     }, function(err, data) {
         cb(err, data);

@@ -8,10 +8,12 @@ exports = module.exports = function(req, res) {
 	
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
-	locals.section = 'leave';
+	locals.section = 'members/' + req.params.org;
+    locals.org = req.params.org;
+    locals.ghUser = req.params.ghUser;
     
     view.on('init', function(next) {
-        github.removeUserFromOrganization(req.user, req.params.org, function(err, data) {
+        github.removeUserFromOrganizationViaAdmin(req.params.ghUser, req.params.org, function(err, data) {
             if (err) {
                 locals.error = err;
             }
@@ -20,6 +22,6 @@ exports = module.exports = function(req, res) {
     });
 	
 	// Render the view
-	view.render('leave');
+	view.render('admin/remove');
 	
 };

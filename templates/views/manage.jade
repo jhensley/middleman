@@ -13,7 +13,8 @@ block content
                 for org in orgs
                     tr
                         td= org.name
-                        td= org.url
+                        td
+                            a(href='http://www.github.com/#{org.name}', target='_blank') http://www.github.com/#{org.name}
                         td
                             if org.active
                                 a(href='/leave/#{org.name}') Leave
