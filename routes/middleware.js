@@ -24,10 +24,22 @@ exports.initLocals = function(req, res, next) {
 	var locals = res.locals;
 	
 	locals.navLinks = [
-		{ label: 'Home',		key: 'home',		href: '/' }
+		{
+            label: 'Home',
+            key: 'home',
+            href: '/'
+        }
 	];
 	
 	locals.user = req.user;
+    
+    if (req.user.services.github.isConfigured) {
+        locals.navLinks.push({
+            label: 'Manage',
+            key: 'manage',
+            href: '/manage/' + req.user.services.github.username
+        })
+    }
 	
 	next();
 	

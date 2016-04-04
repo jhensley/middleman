@@ -9,6 +9,7 @@ exports = module.exports = function(req, res) {
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
 	locals.section = 'join';
+    locals.org = req.params.org;
     
     view.on('init', function(next) {
         github.addUserToOrganization(req.user, req.params.org, function(err, data) {
