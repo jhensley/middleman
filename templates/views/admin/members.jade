@@ -3,7 +3,7 @@ extends ../../layouts/default
 block content
     .container
         h1 Manage Organization Members
-        h3 for #{org}
+        h3 Members in #{org} with matching account
         table.table.table-striped
             thead
                 tr
@@ -19,3 +19,15 @@ block content
                         td= member.services.github.username
                         td
                             a(href='/remove/#{org}/#{member.services.github.username}') Remove
+        h3 Members without matching account (#{notInSystem.length})
+        table.table.table-striped
+            thead
+                tr
+                    td Github Username
+                    td Actions
+            tbody
+                for member in notInSystem
+                    tr
+                        td= member
+                        td
+                            a(href='/remove/#{org}/#{member}') Remove

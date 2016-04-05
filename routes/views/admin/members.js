@@ -1,7 +1,8 @@
 var keystone = require('keystone'),
     Users = keystone.list('User'),
     github = require('../../../utils/github'),
-    async = require('async');
+    async = require('async'),
+    _ = require('lodash');
 
 exports = module.exports = function(req, res) {
 	
@@ -33,9 +34,17 @@ exports = module.exports = function(req, res) {
                     if (err) {
                         return next();
                     }
+                    var localGithubAccounts = _.reduce(data, function(memo, iter) {
+                        memo.push(iter.services.github.username);
+                        return memo;
+                    }, []);
+                    locals.notInSystem = _.filter(members, function(member) {
+                        return localGithubAccounts.indexOf(member) < 0;
+                    });
+                    console.log(locals.notInSystem);
                     locals.members = data;
                     next();
-                })
+                });
             }
         ], function(err) {
             next();
