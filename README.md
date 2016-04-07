@@ -11,6 +11,15 @@ Get the picture? Middleman is meant to solve one very specific problem that many
 ## What does it do exactly?
 Middleman allows you to configure any Passport auth strategy as your login point. We've defaulted to SAML b/c it's what suited the needs best, but feel free to fork the repo and change it. Once a user has authenticated via your preferred authentication strategy, the user will be asked to autorize the app to their Github account. Upon completing the OAuth flow, your users will be presented with a list of available Organizations to join, upon joining they'll be emailed an invite to accept. Once they do that ... the magic is done. Your internally authenticated users are now authorized members of your Github Organization.
 
+## Usage
+
+First, clone the repository to get started, then from the root of the project run the following.
+
+1. [Install NVM](https://github.com/creationix/nvm)
+2. `nvm install 5.0`
+3. 'nvm use 5.0'
+4. 'npm install'
+
 ## Configuration
 
 #### Environment Variables
