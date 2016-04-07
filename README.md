@@ -17,8 +17,8 @@ First, clone the repository to get started, then from the root of the project ru
 
 1. [Install NVM](https://github.com/creationix/nvm)
 2. `nvm install 5.0`
-3. 'nvm use 5.0'
-4. 'npm install'
+3. `nvm use 5.0`
+4. `npm install`
 
 ## Configuration
 
