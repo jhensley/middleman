@@ -14,9 +14,9 @@ Middleman allows you to configure any Passport auth strategy as your login point
 ## Prerequisites
 
 1. `brew install mongodb`
-2. [Install NVM](https://github.com/creationix/nvm)
-3. `nvm install 5.0`
-4. `nvm use 5.0`
+2. `nvm install 5.0`
+3. `nvm use 5.0`
+4. [Install NVM](https://github.com/creationix/nvm)
 5. 'mongod' (run this in a new terminal tab)
 
 ## Usage
