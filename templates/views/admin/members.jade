@@ -3,11 +3,12 @@ extends ../../layouts/default
 block content
     .container
         h1 Manage Organization Members
+        if org.enforce2FA && membersWithout2FA.length > 0
+            div.pull-right
+                form(method='POST', action='/remove/bulk/#{org.name}/members')
+                    input(type='hidden', name='members', value= membersWithout2FA.join(','))
+                    input.btn.btn-primary(type='submit', value='Remove #{membersWithout2FA.length} non-2FA Member(s)')
         h3 Members of #{org.name}
-        div.right
-            form(method='POST', action='/remove/bulk/#{org.name}/members')
-                input(type='hidden', name='members', value= membersWithout2FA.join(','))
-                input(type='submit', value='Remove #{membersWithout2FA.length} non-2FA Member(s)')
         table.table.table-striped
             thead
                 tr
