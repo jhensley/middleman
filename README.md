@@ -62,7 +62,7 @@ Github configuration consists of an `oranizations` object that controls which or
     "organizations": [
         {
             "name": "MyOrganization",
-            "defaultRoles"
+            "enforce2FA": true
         }
     ]
 }
