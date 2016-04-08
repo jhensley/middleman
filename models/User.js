@@ -53,6 +53,12 @@ User.add({
                 type: String,
                 label: 'GitHub username',
                 dependsOn: deps.github
+            },
+            safe: {
+                type: Boolean,
+                default: false,
+                label: 'Safe Account (Do not enforce 2FA)',
+                dependsOn: deps.github
             }
         },
     }

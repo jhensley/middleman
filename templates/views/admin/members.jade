@@ -3,13 +3,15 @@ extends ../../layouts/default
 block content
     .container
         h1 Manage Organization Members
-        h3 Members in #{org} with matching account
+        h3 Members of #{org.name}
         table.table.table-striped
             thead
                 tr
                     td Name
                     td Email
                     td Github Username
+                    if org.enforce2FA
+                        td 2FA
                     td Actions
             tbody
                 for member in members
@@ -17,9 +19,15 @@ block content
                         td #{member.name.first} #{member.name.last}
                         td= member.email
                         td= member.services.github.username
+                        if org.enforce2FA
+                            td
+                                if member.has2FA
+                                    span.glyphicon.glyphicon-ok
+                                else
+                                    span.glyphicon.glyphicon-ban-circle
                         td
-                            a(href='/remove/#{org}/#{member.services.github.username}') Remove
-        h3 Members without matching account (#{notInSystem.length})
+                            a(href='/remove/#{org.name}/#{member.services.github.username}') Remove
+        h3 #{org.name} members not in Middleman (#{notInSystem.length})
         table.table.table-striped
             thead
                 tr
@@ -30,4 +38,4 @@ block content
                     tr
                         td= member
                         td
-                            a(href='/remove/#{org}/#{member}') Remove
+                            a(href='/remove/#{org.name}/#{member}') Remove

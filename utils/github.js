@@ -91,14 +91,19 @@ function _recursePagination(client, data, members, cb) {
     };
 }
 
-exports.getOrganizationMembers = function(org, cb) {
+exports.getOrganizationMembers = function(org, twofactor, cb) {
+    if (_.isFunction(twofactor)) {
+        cb = twofactor;
+        twofactor = false;
+    };
     github.authenticate({
         type: 'oauth',
         token: process.env.GITHUB_ADMIN_TOKEN
     });
     github.orgs.getMembers({
         org: org,
-        per_page: 100
+        per_page: 100,
+        filter: twofactor ? '2fa_disabled' : 'all'
     }, function(err, data) {
         _recursePagination(github, data, data, function(err, members) {
             var reduced = _.reduce(members, function(memo, iter) {
