@@ -1,0 +1,10 @@
+extends ../../layouts/default
+
+block content
+    .container
+        h1 Batch Remove
+        if error 
+            p Oops, looks like there was an error removing members from #{org}.
+            pre= error
+        else
+            p You have removed #{count} members(s) from #{org}.

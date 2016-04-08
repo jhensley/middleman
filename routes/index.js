@@ -46,5 +46,5 @@ exports = module.exports = function(app) {
     app.get('/leave/:org', middleware.requireUser, middleware.requireGithubAuthentication, routes.views.org.leave);
     app.get('/members/:org', middleware.requireAdminUser, routes.views.admin.members);
     app.get('/remove/:org/:ghUser', middleware.requireAdminUser, routes.views.admin.remove);
-	
+	app.post('/remove/bulk/:org/members', middleware.requireAdminUser, routes.views.admin.batchRemove);
 };

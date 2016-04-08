@@ -4,6 +4,10 @@ block content
     .container
         h1 Manage Organization Members
         h3 Members of #{org.name}
+        div.right
+            form(method='POST', action='/remove/bulk/#{org.name}/members')
+                input(type='hidden', name='members', value= membersWithout2FA.join(','))
+                input(type='submit', value='Remove #{membersWithout2FA.length} non-2FA Member(s)')
         table.table.table-striped
             thead
                 tr
