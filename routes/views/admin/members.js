@@ -57,10 +57,12 @@ exports = module.exports = function(req, res) {
                         locals.members = _.forEach(locals.members, function(member) {
                             member.has2FA = members2FADisabled.indexOf(member.services.github.username) < 0;
                         });
-                        locals.membersWithout2FA = _.filter(locals.members, function(member) {
+                        locals.membersWithout2FA = _(locals.members).filter(function(member) {
                             return member.has2FA === false; 
-                        });
-                        console.log(locals.membersWithout2FA);
+                        }).reduce(function(memo, iter) {
+                            memo.push(iter.services.github.username);
+                            return memo;
+                        }, []);
                         next();
                     })
                 } else {
