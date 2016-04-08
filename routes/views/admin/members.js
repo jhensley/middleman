@@ -44,28 +44,30 @@ exports = module.exports = function(req, res) {
                     locals.notInSystem = _.filter(members, function(member) {
                         return localGithubAccounts.indexOf(member) < 0;
                     });
-                    locals.members = data;
-                    next();
+                    next(null, data);
                 });
             },
-            function(next) {
+            function(members, next) {
                 if (locals.org.enforce2FA) {
                     github.getOrganizationMembers(req.params.org, true, function(err, members2FADisabled) {
                         if (err) {
                             return next(err);
                         };
-                        locals.members = _.forEach(locals.members, function(member) {
+                        locals.members = _.forEach(members, function(member) {
                             member.has2FA = members2FADisabled.indexOf(member.services.github.username) < 0;
                         });
                         locals.membersWithout2FA = _(locals.members).filter(function(member) {
                             return member.has2FA === false; 
                         }).reduce(function(memo, iter) {
-                            memo.push(iter.services.github.username);
+                            if (iter.services.github.safe === false) {
+                                memo.push(iter.services.github.username);   
+                            }
                             return memo;
                         }, []);
                         next();
                     })
                 } else {
+                    locals.members = members;
                     next();
                 }
             }

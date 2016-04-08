@@ -7,7 +7,7 @@ block content
             div.pull-right
                 form(method='POST', action='/remove/bulk/#{org.name}/members')
                     input(type='hidden', name='members', value= membersWithout2FA.join(','))
-                    input.btn.btn-primary(type='submit', value='Remove #{membersWithout2FA.length} non-2FA Member(s)')
+                    input.btn.btn-primary(type='submit', value='Remove #{membersWithout2FA.length} non-2FA member(s)')
         h3 Members of #{org.name}
         table.table.table-striped
             thead
@@ -17,6 +17,7 @@ block content
                     td Github Username
                     if org.enforce2FA
                         td 2FA
+                    td Safe
                     td Actions
             tbody
                 for member in members
@@ -26,10 +27,17 @@ block content
                         td= member.services.github.username
                         if org.enforce2FA
                             td
-                                if member.has2FA
+                                if member.has2FA && !member.services.github.safe
                                     span.glyphicon.glyphicon-ok
-                                else
+                                else if !member.services.github.safe
                                     span.glyphicon.glyphicon-ban-circle
+                                else if member.services.github.safe
+                                    span.glyphicon.glyphicon-minus
+                        td
+                            if member.services.github.safe
+                                span.glyphicon.glyphicon-ok
+                            else
+                                span.glyphicon.glyphicon-ban-circle
                         td
                             a(href='/remove/#{org.name}/#{member.services.github.username}') Remove
         h3 #{org.name} members not in Middleman (#{notInSystem.length})
