@@ -49,3 +49,21 @@ SAML_ISSUER=issuer-string
 SAML_CALLBACK_URL=/auth/saml/callback
 ```
 
+#### App Configuration
+
+Configuration is setup in `config/default.json`, check it out to get running. Below are some of the more important configuration options.
+
+###### Github
+
+Github configuration consists of an `oranizations` object that controls which organizations you'll be managing, as well as how.
+
+```json
+"github": {
+    "organizations": [
+        {
+            "name": "MyOrganization",
+            "defaultRoles"
+        }
+    ]
+}
+```

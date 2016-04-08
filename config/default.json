@@ -3,7 +3,8 @@
         "organizations": [
             {
                 "name": "GannettDigital",
-                "defaultRoles": []
+                "defaultRole": "member",
+                "enforce2FA": true
             }
         ]
     }
