@@ -1,7 +1,22 @@
 {
   "name": "middleman",
-  "version": "0.0.0",
-  "private": true,
+  "description": "A middleman between github.com organizations and internal authentication methods",
+  "keywords": ["github","saml","authentication","passport"],
+  "bugs": {
+    "url": "https://github.com/jhensley/middleman/issues",
+    "email": "hello@jhensley.io"
+  }, 
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jhensley/middleman.git"
+  },
+  "author": {
+    "name": "Jonathan Hensley",
+    "email": "hello@jhensley.io",
+    "url": "http://jhensley.io"
+  },
+  "version": "0.1.0",
   "dependencies": {
     "async": "^0.9.2",
     "config": "^1.19.0",
