@@ -1,5 +1,5 @@
 {
-  "name": "middleman",
+  "name": "github-middleman",
   "description": "A middleman between github.com organizations and internal authentication methods",
   "keywords": ["github","saml","authentication","passport"],
   "bugs": {
