@@ -6,6 +6,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Require keystone
 var keystone = require('keystone');
+var mongoose = require('mongoose');
+
+// Override the instance of mongoose ... with 4.0
+keystone.set('mongoose', mongoose);
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
