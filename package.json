@@ -1,6 +1,5 @@
 {
   "name": "gannett-middleman",
-  "private": true,
   "description": "A middleman between github.com organizations and internal authentication methods",
   "keywords": ["github","saml","authentication","passport"],
   "bugs": {
