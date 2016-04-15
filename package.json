@@ -7,6 +7,9 @@
     "url": "https://github.com/jhensley/middleman/issues",
     "email": "hello@jhensley.io"
   }, 
+  "publishConfig" : {
+    "registry" : "http://presto-sinopia.awsdev.usatoday.com"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
