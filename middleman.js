@@ -19,6 +19,7 @@ keystone.init({
 
 	'name': 'middleman',
 	'brand': 'middleman',
+	'host': process.env.IP || '127.0.0.1',
 	
 	'less': 'public',
 	'static': 'public',
