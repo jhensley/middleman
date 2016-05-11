@@ -4,6 +4,9 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').load();
 }
 
+// Setup the MONGO_URI ENV var based on Scalr script
+process.env['MONGO_URI'] = process.env.MONGODB_HOST || 'mongodb://localhost:27017';
+
 // Require keystone
 var keystone = require('keystone');
 var mongoose = require('mongoose');
